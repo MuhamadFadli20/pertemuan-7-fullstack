@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puncak Nusantara — Ekspedisi Gunung Indonesia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080c09;
+    --bg2: #0e1510;
+    --bg3: #131a14;
+    --forest: #1b3d25;
+    --moss: #2d5a38;
+    --gold: #c8923a;
+    --gold-light: #e0b46a;
+    --cream: #f0e9dc;
+    --cream-dim: #b8ad9e;
+    --text: #e0d8cc;
+    --text-dim: #8a8178;
+    --border: rgba(200,146,58,0.18);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: linear-gradient(to bottom, rgba(8,12,9,0.95) 0%, transparent 100%);
+    transition: background 0.4s;
+  }
+  nav.scrolled { background: rgba(8,12,9,0.97); border-bottom: 1px solid var(--border); }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .nav-logo .logo-icon { color: var(--gold); font-size: 1.3rem; }
+
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    color: var(--cream-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.55rem 1.5rem;
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+  /* ── HERO ── */
+  #hero {
+    height: 100vh; min-height: 700px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, #1b3d25 0%, #0a0f0b 55%, #060908 100%);
+  }
+
+  .hero-stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 15% 12%, rgba(240,233,220,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 8%, rgba(240,233,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 5%, rgba(240,233,220,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 15%, rgba(240,233,220,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 20%, rgba(240,233,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 18%, rgba(240,233,220,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 10%, rgba(240,233,220,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 7% 25%, rgba(240,233,220,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 3%, rgba(240,233,220,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 22%, rgba(240,233,220,0.4) 0%, transparent 100%);
+  }
+
+  .hero-mountain {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 70%;
+  }
+
+  .hero-content {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 0 1.5rem;
+    max-width: 800px;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 1px;
+    animation: fadeUp 1s 0.1s ease both;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 8vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    letter-spacing: 0.01em;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1s 0.25s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--cream-dim);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    letter-spacing: 0.02em;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1s 0.55s ease both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    padding: 0.85rem 2.2rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(240,233,220,0.3);
+    padding: 0.85rem 2.2rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 10;
+    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: fadeIn 2s 1.2s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollAnim 2s infinite;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 1.5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+  }
+  .stat-item { padding: 0.5rem; border-right: 1px solid var(--border); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4rem; }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.15;
+  }
+  .section-title strong { font-weight: 600; font-style: italic; color: var(--gold-light); }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--bg2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--cream-dim);
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+    font-size: 0.97rem;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+  }
+
+  .about-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+
+  .about-feat h4 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 0.3rem;
+  }
+  .about-feat p { font-size: 0.82rem; color: var(--text-dim); }
+
+  .about-quote {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--cream);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── DESTINATIONS ── */
+  #destinations { background: var(--bg); }
+
+  .dest-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3.5rem;
+  }
+
+  .mountains-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+  }
+
+  .mountain-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    background: var(--bg3);
+  }
+  .mountain-card:first-child { grid-row: span 2; aspect-ratio: auto; }
+
+  .mountain-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .mountain-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(6,9,7,0.92) 0%, rgba(6,9,7,0.3) 50%, transparent 100%);
+    transition: all 0.4s;
+  }
+  .mountain-card:hover .mountain-overlay { background: linear-gradient(to top, rgba(6,9,7,0.97) 0%, rgba(6,9,7,0.5) 60%, rgba(6,9,7,0.1) 100%); }
+
+  .mountain-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1.5rem;
+  }
+
+  .mountain-province {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .mountain-name {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+  .mountain-card:first-child .mountain-name { font-size: 2.5rem; }
+
+  .mountain-alt {
+    font-size: 0.8rem;
+    color: var(--cream-dim);
+    font-weight: 300;
+  }
+
+  .mountain-tag {
+    display: inline-block;
+    margin-top: 0.6rem;
+    background: rgba(200,146,58,0.2);
+    border: 1px solid rgba(200,146,58,0.4);
+    color: var(--gold-light);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 1px;
+  }
+
+  /* ── PACKAGES ── */
+  #packages { background: var(--bg2); }
+
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .pkg-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .pkg-card:hover { transform: translateY(-6px); border-color: rgba(200,146,58,0.5); }
+  .pkg-card.featured { border-color: var(--gold); }
+
+  .pkg-badge {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.3rem 1rem;
+    white-space: nowrap;
+  }
+
+  .pkg-icon {
+    width: 42px; height: 42px;
+    background: rgba(200,146,58,0.1);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  .pkg-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .pkg-sub { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+
+  .pkg-price {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+  .pkg-price-note { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+
+  .pkg-features { list-style: none; margin-bottom: 2rem; }
+  .pkg-features li {
+    font-size: 0.85rem;
+    color: var(--cream-dim);
+    padding: 0.45rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: flex-start; gap: 0.6rem;
+  }
+  .pkg-features li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 0.5rem;
+    margin-top: 0.45rem;
+    flex-shrink: 0;
+  }
+
+  /* ── WHY US ── */
+  #why { background: var(--bg); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .why-card {
+    padding: 1.8rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+  .why-card:hover { border-color: rgba(200,146,58,0.5); }
+
+  .why-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: rgba(200,146,58,0.15);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+
+  .why-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+
+  .why-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+  }
+
+  .why-text { font-size: 0.85rem; color: var(--text-dim); font-weight: 300; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--bg2); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testi-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+  }
+
+  .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+
+  .testi-text {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-author {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .testi-avatar {
+    width: 40px; height: 40px;
+    background: var(--moss);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    flex-shrink: 0;
+  }
+
+  .testi-name { font-size: 0.88rem; font-weight: 500; color: var(--cream); }
+  .testi-loc { font-size: 0.75rem; color: var(--text-dim); }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--forest);
+    text-align: center;
+    padding: 6rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(200,146,58,0.08) 0%, transparent 70%);
+  }
+
+  #cta .section-title { margin-bottom: 1rem; }
+  #cta p {
+    color: var(--cream-dim);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg); padding: 5rem 4rem; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-info-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  .contact-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: rgba(200,146,58,0.1);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    border-radius: 2px;
+  }
+  .contact-info-item h4 { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .contact-info-item p { font-size: 0.9rem; color: var(--cream); }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--gold); }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: var(--text-dim); }
+  .contact-form textarea { height: 120px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050705;
+    border-top: 1px solid var(--border);
+    padding: 3rem 4rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .nav-logo { margin-bottom: 1rem; display: inline-flex; }
+  .footer-brand p { font-size: 0.83rem; color: var(--text-dim); font-weight: 300; max-width: 240px; line-height: 1.7; }
+
+  .footer-col h4 {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.55rem; }
+  .footer-col ul li a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.78rem; color: var(--text-dim); }
+
+  .social-links { display: flex; gap: 1rem; }
+  .social-links a {
+    width: 34px; height: 34px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .social-links a:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes scrollAnim {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .stats-bar { grid-template-columns: 1fr 1fr; padding: 1.5rem; }
+    .stat-item:nth-child(2) { border-right: none; }
+    #about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .mountains-grid { grid-template-columns: 1fr 1fr; }
+    .mountain-card:first-child { grid-row: auto; }
+    .packages-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="logo-icon">▲</span> Puncak Nusantara
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang Kami</a></li>
+    <li><a href="#destinations">Destinasi</a></li>
+    <li><a href="#packages">Paket</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Daftar Sekarang</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stars"></div>
+
+  <svg class="hero-mountain" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mtn1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1b3d25" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#080c09" stop-opacity="1"/>
+      </linearGradient>
+      <linearGradient id="mtn2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0f1f14" stop-opacity="0.95"/>
+        <stop offset="100%" stop-color="#080c09"/>
+      </linearGradient>
+      <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0e9dc" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#f0e9dc" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+        <stop offset="0%" stop-color="#c8923a" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="#c8923a" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- Far mountains -->
+    <polygon points="200,600 500,120 800,600" fill="url(#mtn2)" opacity="0.4"/>
+    <polygon points="600,600 900,180 1200,600" fill="url(#mtn2)" opacity="0.35"/>
+    <polygon points="900,600 1150,200 1440,600" fill="url(#mtn2)" opacity="0.3"/>
+    <!-- Mid mountains -->
+    <polygon points="0,600 350,180 700,600" fill="url(#mtn1)" opacity="0.7"/>
+    <polygon points="400,600 720,100 1040,600" fill="url(#mtn1)"/>
+    <polygon points="750,600 1050,220 1350,600" fill="url(#mtn1)" opacity="0.8"/>
+    <!-- Foreground ridge -->
+    <polygon points="-20,600 250,350 550,600" fill="#080c09"/>
+    <polygon points="350,600 600,380 900,600" fill="#080c09"/>
+    <polygon points="800,600 1050,320 1300,600" fill="#080c09"/>
+    <polygon points="1200,600 1440,400 1460,600" fill="#080c09"/>
+    <!-- Snow caps -->
+    <polygon points="700,100 720,100 745,150 670,150" fill="url(#snow)" opacity="0.5"/>
+    <!-- Gold glow at peak -->
+    <ellipse cx="720" cy="100" rx="120" ry="80" fill="url(#glow)"/>
+    <!-- Mist layer -->
+    <rect x="0" y="480" width="1440" height="120" fill="url(#mtn2)" opacity="0.6"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">Sejak 2012 · Ekspedisi Terpercaya Indonesia</div>
+    <h1 class="hero-title">Raih <em>Puncak</em><br>Nusantara</h1>
+    <p class="hero-sub">Kami mengantarkan jiwa-jiwa pemberani menuju puncak tertinggi kepulauan Indonesia — dengan keamanan, pengalaman, dan penuh keajaiban alam.</p>
+    <div class="hero-btns">
+      <a href="#packages" class="btn-primary">Lihat Paket Wisata</a>
+      <a href="#destinations" class="btn-outline">Jelajahi Destinasi</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Gulir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">12+</span>
+    <span class="stat-label">Tahun Pengalaman</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">4.800+</span>
+    <span class="stat-label">Pendaki Terlayani</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">28</span>
+    <span class="stat-label">Destinasi Gunung</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">98%</span>
+    <span class="stat-label">Tingkat Kepuasan</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text reveal">
+    <span class="section-label">Tentang Kami</span>
+    <h2 class="section-title">Lebih dari sekadar<br><strong>perjalanan biasa</strong></h2>
+    <br>
+    <p>Puncak Nusantara lahir dari kecintaan mendalam terhadap alam pegunungan Indonesia. Kami bukan sekadar travel agent — kami adalah mitra pendakian yang memahami setiap medan, setiap musim, dan setiap cerita di balik puncak-puncak megah nusantara.</p>
+    <p>Bersama tim guide bersertifikat dan berpengalaman, kami memastikan setiap perjalanan tidak hanya aman, tetapi juga menjadi kenangan yang tak terlupakan sepanjang hidup Anda.</p>
+    <p>Dari Rinjani yang legendaris hingga Carstensz yang menantang, kami telah menemani ribuan pendaki mewujudkan impian menapaki puncak tertinggi Indonesia.</p>
+    <br>
+    <a href="#contact" class="btn-primary">Konsultasi Gratis</a>
+  </div>
+  <div class="about-visual reveal">
+    <div class="about-card">
+      <p class="about-quote">"Setiap gunung punya ceritanya sendiri. Tugas kami adalah memastikan Anda siap mendengarkannya."</p>
+      <div class="about-card-grid">
+        <div class="about-feat">
+          <h4>Guide Bersertifikat</h4>
+          <p>Seluruh guide kami memiliki sertifikasi SAR & WAAS internasional</p>
+        </div>
+        <div class="about-feat">
+          <h4>Perlengkapan Premium</h4>
+          <p>Tenda, sleeping bag, dan alat keselamatan standar internasional</p>
+        </div>
+        <div class="about-feat">
+          <h4>Asuransi Penuh</h4>
+          <p>Perlindungan asuransi pendakian selama seluruh perjalanan berlangsung</p>
+        </div>
+        <div class="about-feat">
+          <h4>Evakuasi Darurat</h4>
+          <p>Prosedur evakuasi dan SOS siap 24 jam sepanjang jalur pendakian</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section id="destinations">
+  <div class="dest-header reveal">
+    <div>
+      <span class="section-label">Destinasi Unggulan</span>
+      <h2 class="section-title">Gunung-gunung<br><strong>paling ikonik</strong></h2>
+    </div>
+    <a href="#" class="btn-outline" style="white-space:nowrap">Lihat Semua →</a>
+  </div>
+
+  <div class="mountains-grid reveal">
+    <!-- Card 1 - Large -->
+    <div class="mountain-card">
+      <svg viewBox="0 0 400 700" class="mountain-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0a1a12"/>
+            <stop offset="100%" stop-color="#1a3d25"/>
+          </linearGradient>
+          <linearGradient id="rim1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2d5a38"/>
+            <stop offset="100%" stop-color="#0e1510"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="700" fill="url(#sky1)"/>
+        <circle cx="200" cy="280" r="3" fill="#f0e9dc" opacity="0.6"/>
+        <circle cx="80" cy="200" r="2" fill="#f0e9dc" opacity="0.4"/>
+        <circle cx="320" cy="150" r="2" fill="#f0e9dc" opacity="0.5"/>
+        <circle cx="150" cy="100" r="1.5" fill="#f0e9dc" opacity="0.4"/>
+        <circle cx="280" cy="220" r="1.5" fill="#f0e9dc" opacity="0.3"/>
+        <!-- Caldera lake shape -->
+        <ellipse cx="200" cy="420" rx="160" ry="80" fill="#1a6b8a" opacity="0.7"/>
+        <ellipse cx="200" cy="420" rx="155" ry="75" fill="#1d7a9e" opacity="0.4"/>
+        <!-- Rim mountains -->
+        <polygon points="0,700 80,320 160,380 200,250 240,380 320,300 400,700" fill="url(#rim1)"/>
+        <polygon points="0,700 60,350 120,400 200,280 280,390 350,330 400,700" fill="#1b3d25" opacity="0.8"/>
+        <polygon points="130,700 200,280 270,700" fill="#0e1510" opacity="0.5"/>
+        <!-- Snow on peak -->
+        <polygon points="185,280 200,250 215,280 200,285" fill="#f0e9dc" opacity="0.6"/>
+      </svg>
+      <div class="mountain-overlay"></div>
+      <div class="mountain-info">
+        <div class="mountain-province">Nusa Tenggara Barat</div>
+        <div class="mountain-name">Gunung Rinjani</div>
+        <div class="mountain-alt">3.726 mdpl · Kaldera &amp; Danau Segara Anak</div>
+        <span class="mountain-tag">Terpopuler</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="mountain-card">
+      <svg viewBox="0 0 400 360" class="mountain-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky2" x1="0" y1="0" x2="0.5" y2="1">
+            <stop offset="0%" stop-color="#050a06"/>
+            <stop offset="100%" stop-color="#1a2e1c"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="360" fill="url(#sky2)"/>
+        <circle cx="300" cy="80" r="2" fill="#f0e9dc" opacity="0.5"/>
+        <circle cx="60" cy="60" r="1.5" fill="#f0e9dc" opacity="0.4"/>
+        <circle cx="200" cy="40" r="1" fill="#f0e9dc" opacity="0.4"/>
+        <!-- Smoke effect -->
+        <ellipse cx="200" cy="100" rx="18" ry="40" fill="#3a3a3a" opacity="0.3"/>
+        <ellipse cx="195" cy="65" rx="12" ry="30" fill="#4a4a4a" opacity="0.2"/>
+        <!-- Mountain -->
+        <polygon points="0,360 200,60 400,360" fill="#1b3d25"/>
+        <polygon points="100,360 200,60 300,360" fill="#0e1510" opacity="0.6"/>
+        <!-- Lava glow -->
+        <ellipse cx="200" cy="180" rx="60" ry="30" fill="#c8500a" opacity="0.08"/>
+        <polygon points="185,60 200,45 215,60 200,65" fill="#f0e9dc" opacity="0.5"/>
+      </svg>
+      <div class="mountain-overlay"></div>
+      <div class="mountain-info">
+        <div class="mountain-province">Jawa Timur</div>
+        <div class="mountain-name">Semeru</div>
+        <div class="mountain-alt">3.676 mdpl · Mahameru</div>
+        <span class="mountain-tag">Aktif</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="mountain-card">
+      <svg viewBox="0 0 400 360" class="mountain-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0a1208"/>
+            <stop offset="100%" stop-color="#22401a"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="360" fill="url(#sky3)"/>
+        <circle cx="350" cy="50" r="2" fill="#f0e9dc" opacity="0.5"/>
+        <circle cx="50" cy="80" r="1.5" fill="#f0e9dc" opacity="0.4"/>
+        <!-- Sea of sand - Bromo -->
+        <ellipse cx="200" cy="300" rx="250" ry="80" fill="#2a2015" opacity="0.9"/>
+        <!-- Bromo crater -->
+        <polygon points="100,360 200,180 300,360" fill="#1a2e10"/>
+        <!-- Tengger rim -->
+        <polygon points="0,360 80,280 200,180 320,270 400,360" fill="#1b3d25" opacity="0.7"/>
+        <!-- Bromo caldera -->
+        <ellipse cx="200" cy="195" rx="25" ry="15" fill="#1a1208" opacity="0.8"/>
+        <!-- Smoke -->
+        <ellipse cx="200" cy="165" rx="10" ry="25" fill="#888" opacity="0.2"/>
+        <!-- Semeru far bg -->
+        <polygon points="280,360 360,100 440,360" fill="#0e1f0a" opacity="0.5"/>
+      </svg>
+      <div class="mountain-overlay"></div>
+      <div class="mountain-info">
+        <div class="mountain-province">Jawa Timur</div>
+        <div class="mountain-name">Bromo</div>
+        <div class="mountain-alt">2.329 mdpl · Lautan Pasir Tengger</div>
+        <span class="mountain-tag">Sunrise Terbaik</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="mountain-card">
+      <svg viewBox="0 0 400 360" class="mountain-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky4" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#061008"/>
+            <stop offset="100%" stop-color="#162b18"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="360" fill="url(#sky4)"/>
+        <circle cx="100" cy="60" r="2" fill="#f0e9dc" opacity="0.5"/>
+        <circle cx="290" cy="90" r="1.5" fill="#f0e9dc" opacity="0.4"/>
+        <circle cx="200" cy="30" r="1" fill="#f0e9dc" opacity="0.4"/>
+        <!-- Kerinci - tall stratovolcano -->
+        <polygon points="0,360 200,40 400,360" fill="#2d5a38"/>
+        <polygon points="100,360 200,40 300,360" fill="#1b3d25"/>
+        <polygon points="160,360 200,40 240,360" fill="#0e1510" opacity="0.7"/>
+        <polygon points="185,40 200,20 215,40 200,46" fill="#f0e9dc" opacity="0.7"/>
+        <!-- Dense forest texture suggestion -->
+        <polygon points="0,360 50,300 100,330 150,290 200,310 250,280 300,320 350,295 400,360" fill="#1a3d20" opacity="0.6"/>
+      </svg>
+      <div class="mountain-overlay"></div>
+      <div class="mountain-info">
+        <div class="mountain-province">Sumatera Barat</div>
+        <div class="mountain-name">Kerinci</div>
+        <div class="mountain-alt">3.805 mdpl · Tertinggi di Sumatera</div>
+        <span class="mountain-tag">Sumatera</span>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="mountain-card">
+      <svg viewBox="0 0 400 360" class="mountain-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky5" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#08120a"/>
+            <stop offset="100%" stop-color="#1c3520"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="360" fill="url(#sky5)"/>
+        <circle cx="340" cy="70" r="2" fill="#f0e9dc" opacity="0.4"/>
+        <circle cx="70" cy="50" r="1.5" fill="#f0e9dc" opacity="0.3"/>
+        <!-- Multiple peaks - Merbabu -->
+        <polygon points="0,360 150,120 300,360" fill="#2d5a38"/>
+        <polygon points="100,360 250,100 400,360" fill="#1b3d25"/>
+        <polygon points="200,360 250,100 310,360" fill="#0e1510" opacity="0.6"/>
+        <polygon points="50,360 150,120 200,360" fill="#0e1510" opacity="0.5"/>
+        <!-- Two peaks -->
+        <polygon points="138,120 150,95 162,120 150,125" fill="#e8ddd0" opacity="0.4"/>
+        <polygon points="240,100 250,75 260,100 250,105" fill="#e8ddd0" opacity="0.35"/>
+      </svg>
+      <div class="mountain-overlay"></div>
+      <div class="mountain-info">
+        <div class="mountain-province">Jawa Tengah</div>
+        <div class="mountain-name">Merbabu</div>
+        <div class="mountain-alt">3.142 mdpl · Padang Savana</div>
+        <span class="mountain-tag">Pemula Friendly</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+    <span class="section-label">Paket Wisata</span>
+    <h2 class="section-title">Pilihan <strong>paket terbaik</strong><br>sesuai kebutuhan Anda</h2>
+  </div>
+
+  <div class="packages-grid reveal">
+    <!-- Basic -->
+    <div class="pkg-card">
+      <div class="pkg-icon">🌿</div>
+      <div class="pkg-name">Explorer</div>
+      <div class="pkg-sub">Cocok untuk pendaki pemula & keluarga</div>
+      <div class="pkg-price">Rp 1,8 Jt</div>
+      <div class="pkg-price-note">per orang · min. 4 orang</div>
+      <ul class="pkg-features">
+        <li>Guide bersertifikat 1 orang</li>
+        <li>Porter barang (max 10kg)</li>
+        <li>Tenda dome kapasitas 3 orang</li>
+        <li>P3K & asuransi perjalanan</li>
+        <li>Briefing keselamatan pra-pendakian</li>
+        <li>Transportasi lokal antar-jemput</li>
+      </ul>
+      <a href="#contact" class="btn-outline" style="width:100%;text-align:center;display:block">Pilih Paket</a>
+    </div>
+
+    <!-- Featured -->
+    <div class="pkg-card featured">
+      <div class="pkg-badge">⭐ Terpopuler</div>
+      <div class="pkg-icon">🏔️</div>
+      <div class="pkg-name">Summit</div>
+      <div class="pkg-sub">Pengalaman pendakian lengkap & premium</div>
+      <div class="pkg-price">Rp 3,2 Jt</div>
+      <div class="pkg-price-note">per orang · min. 2 orang</div>
+      <ul class="pkg-features">
+        <li>Guide & asisten guide bersertifikat</li>
+        <li>Porter barang tanpa batas berat</li>
+        <li>Tenda & sleeping bag premium</li>
+        <li>Makan 3x sehari selama pendakian</li>
+        <li>Dokumentasi foto &amp; video</li>
+        <li>Asuransi evakuasi helicopter</li>
+        <li>Sertifikat &amp; kenang-kenangan</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="width:100%;text-align:center;display:block">Pilih Paket</a>
+    </div>
+
+    <!-- Private -->
+    <div class="pkg-card">
+      <div class="pkg-icon">👑</div>
+      <div class="pkg-name">Eksklusif</div>
+      <div class="pkg-sub">Perjalanan privat yang sepenuhnya disesuaikan</div>
+      <div class="pkg-price">Custom</div>
+      <div class="pkg-price-note">harga menyesuaikan kebutuhan</div>
+      <ul class="pkg-features">
+        <li>Tim guide & porter dedicated</li>
+        <li>Itinerary 100% customizable</li>
+        <li>Akomodasi premium di basecamp</li>
+        <li>Chef pribadi & menu pilihan</li>
+        <li>Dokumentasi profesional</li>
+        <li>Concierge service 24 jam</li>
+        <li>Transfer private airport/hotel</li>
+      </ul>
+      <a href="#contact" class="btn-outline" style="width:100%;text-align:center;display:block">Hubungi Kami</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 0;">
+    <span class="section-label">Keunggulan Kami</span>
+    <h2 class="section-title">Mengapa memilih<br><strong>Puncak Nusantara?</strong></h2>
+  </div>
+
+  <div class="why-grid reveal">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <div class="why-icon">🛡️</div>
+      <div class="why-title">Keselamatan Utama</div>
+      <p class="why-text">Protokol keselamatan ketat dengan standar SAR internasional. Setiap guide terlatih pertolongan pertama di alam terbuka.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <div class="why-icon">🌿</div>
+      <div class="why-title">Eco-Responsible</div>
+      <p class="why-text">Kami berkomitmen menjaga kelestarian alam. Setiap perjalanan menerapkan prinsip Leave No Trace dan zero waste.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <div class="why-icon">🗺️</div>
+      <div class="why-title">Lokal Expert</div>
+      <p class="why-text">Guide lokal kami mengenal setiap jalur, cuaca, dan kondisi medan dengan sangat baik berkat pengalaman bertahun-tahun.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <div class="why-icon">📞</div>
+      <div class="why-title">Support 24/7</div>
+      <p class="why-text">Tim kami selalu siap membantu Anda sebelum, selama, dan setelah pendakian. Tidak ada pertanyaan yang terlalu kecil.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+    <span class="section-label">Testimoni</span>
+    <h2 class="section-title">Cerita dari para<br><strong>penjelajah kami</strong></h2>
+  </div>
+
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Pendakian Rinjani bersama Puncak Nusantara adalah pengalaman terbaik dalam hidup saya. Guide-nya sangat profesional dan supportif. Danau Segara Anak benar-benar memukau!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">AR</div>
+        <div>
+          <div class="testi-name">Andi Rachmat</div>
+          <div class="testi-loc">Jakarta · Rinjani, 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Saya pertama kali mendaki dan memilih paket Explorer ke Merbabu. Timnya sabar dan sangat membantu. Pemandangan savananya luar biasa indah. Pasti bakal balik lagi!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">SW</div>
+        <div>
+          <div class="testi-name">Sari Wulandari</div>
+          <div class="testi-loc">Surabaya · Merbabu, 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Paket Eksklusif ke Semeru benar-benar beyond expectation. Makanannya enak, tenda nyaman, fotografer profesional. Setiap momen terdokumentasi dengan indah. Worth every penny!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">BH</div>
+        <div>
+          <div class="testi-name">Budi Hartono</div>
+          <div class="testi-loc">Bandung · Semeru, 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="reveal">
+    <span class="section-label">Mulai Perjalanan</span>
+    <h2 class="section-title">Puncak menunggumu.<br><strong>Kapan kita berangkat?</strong></h2>
+    <p>Konsultasikan mimpi pendakianmu bersama tim kami. Gratis, tanpa komitmen, dan penuh semangat untuk membantu Anda merencanakan ekspedisi terbaik.</p>
+    <div class="cta-btns">
+      <a href="#contact" class="btn-primary">Konsultasi Gratis Sekarang</a>
+      <a href="https://wa.me/6281234567890" class="btn-outline">💬 Chat via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <span class="section-label">Hubungi Kami</span>
+      <h2 class="section-title">Mari kita<br><strong>rencanakan bersama</strong></h2>
+      <br>
+      <div class="contact-info-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Alamat</h4>
+          <p>Jl. Bukit Indah No. 47, Malang<br>Jawa Timur 65141</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h4>Telepon / WhatsApp</h4>
+          <p>+62 812-3456-7890</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <h4>Email</h4>
+          <p>info@puncaknusantara.id</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <h4>Jam Operasional</h4>
+          <p>Senin–Sabtu: 08.00 – 20.00 WIB<br>Minggu: 09.00 – 17.00 WIB</p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2rem;">
+        <h3 style="font-family:var(--font-display);font-size:1.5rem;color:var(--cream);margin-bottom:1.5rem;font-weight:600;">Kirim Pesan</h3>
+        <div class="form-row">
+          <input type="text" placeholder="Nama Lengkap">
+          <input type="tel" placeholder="Nomor WhatsApp">
+        </div>
+        <input type="email" placeholder="Alamat Email">
+        <select style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:2px;color:var(--text-dim);font-family:var(--font-body);font-size:0.88rem;padding:0.8rem 1rem;margin-bottom:1rem;outline:none;appearance:none;">
+          <option value="">Destinasi yang diminati…</option>
+          <option>Gunung Rinjani</option>
+          <option>Gunung Semeru</option>
+          <option>Gunung Bromo</option>
+          <option>Gunung Kerinci</option>
+          <option>Gunung Merbabu</option>
+          <option>Destinasi lainnya</option>
+        </select>
+        <textarea placeholder="Ceritakan rencana pendakianmu — jumlah peserta, tanggal yang diinginkan, atau pertanyaan lain…"></textarea>
+        <button class="btn-primary" style="width:100%" onclick="alert('Pesan terkirim! Tim kami akan segera menghubungi Anda.')">Kirim Pesan →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo"><span class="logo-icon">▲</span> Puncak Nusantara</a>
+      <p>Mitra pendakian gunung terpercaya di Indonesia sejak 2012. Kami mengantarkan Anda ke puncak dengan aman dan berkesan.</p>
+      <div class="social-links" style="margin-top:1.2rem">
+        <a href="#">in</a>
+        <a href="#">ig</a>
+        <a href="#">yt</a>
+        <a href="#">wa</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Destinasi</h4>
+      <ul>
+        <li><a href="#">Gunung Rinjani</a></li>
+        <li><a href="#">Gunung Semeru</a></li>
+        <li><a href="#">Gunung Bromo</a></li>
+        <li><a href="#">Gunung Kerinci</a></li>
+        <li><a href="#">Gunung Merbabu</a></li>
+        <li><a href="#">Carstensz Pyramid</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="#">Paket Explorer</a></li>
+        <li><a href="#">Paket Summit</a></li>
+        <li><a href="#">Paket Eksklusif</a></li>
+        <li><a href="#">Pelatihan Pendakian</a></li>
+        <li><a href="#">Sewa Perlengkapan</a></li>
+        <li><a href="#">Corporate Outbound</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informasi</h4>
+      <ul>
+        <li><a href="#">Tentang Kami</a></li>
+        <li><a href="#">Blog Pendakian</a></li>
+        <li><a href="#">Panduan Pemula</a></li>
+        <li><a href="#">Tips Keselamatan</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Kontak</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Puncak Nusantara. Seluruh hak cipta dilindungi.</p>
+    <p>Dibuat dengan ❤️ untuk para pendaki Indonesia</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
